@@ -1,0 +1,2 @@
+# Anticovid
+Test Anticovid app
