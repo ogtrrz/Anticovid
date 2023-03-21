@@ -13,7 +13,6 @@ include /etc/nginx/modules-enabled/*.conf;
 
 events {
 worker_connections 768;
-# multi_accept on;
 }
 
 http {
@@ -96,7 +95,6 @@ server {
 	}
 
 
-#    listen [::]:443 ssl ipv6only=on; # managed by Certbot
     listen 443 ssl http2 reuseport; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/nx-11.mexicana.mx/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/nx-11.mexicana.mx/privkey.pem; # managed by Certbot
