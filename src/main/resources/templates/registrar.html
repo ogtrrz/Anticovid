@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sitio falso pruebas Registro ANTICOVID</title>
+    <style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+<h1>Sitio falso pruebas Registro ANTICOVID</h1>
+<p style="color:#FF0000";>Este sitio fue creado para realizar pruebas simulando un alto trafico legitimo y ataques de diversos tipos de saboteadores. NO ES OPERACIONAL y ni el gobierno de Mexico, ni ninguna otra autoridad tiene alguna relacion con el mismo. Es mas balin que un billete de $3.- dolares.</p>
+
+<form action="#" th:action="@{/registrar}" th:object="${registrar}" method="post">
+    <p>Favor de registrar el CURP de la persona a vacunar.</p>
+    <label>CURP:</label><br>
+    <input type="text" th:field="*{curp}" required
+           pattern="^[0-9]{8}$" title="CURP invalida"><br><br>
+
+    <p>Favor de registrar su correo electronico para notificaciones.</p>
+    <label>Correo Electronico:</label><br>
+    <input type="email" th:field="*{email}" required><br><br>
+    <p>Por supuesto no ponemos un CAPTCHA, hacemos el trabajo.</p><br><br>
+    <p><input type="submit" value="Enviar" /> <input type="reset" value="Borrar" /></p>
+</form>
+</body>
+</html>

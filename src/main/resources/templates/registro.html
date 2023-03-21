@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Gracias</h1>
+<h2>El registro fue exitoso</h2><br><br>
+<p th:text="'curp: ' + ${registrar.curp}" />
+<p th:text="'correo: ' + ${registrar.email}" />
+<a href="/registrar">Registrar a otra persona</a>
+</body>
+</html>
