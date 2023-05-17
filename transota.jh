@@ -1,0 +1,129 @@
+//Paso data
+entity Reportes {
+	titulo String,
+    caso String,
+    img String,
+    autor String,
+    tituloix String,
+    autorix String,
+    fechaix Instant,
+    imgix String,
+    ciudad String,
+    estado String,
+    pais String,
+    extra1 String,
+    extra2 String,
+    extra3 String,
+    extra4 String,
+    extra5 String,
+    extra6 String,
+    extra7 String,
+    extra8 String,
+    extra9 String,
+    extra10 String
+}
+
+entity Categorys {
+	categoria String,
+    extra1 String,
+    extra2 String,
+    extra3 String,
+    extra4 String,
+    extra5 String,
+    extra6 String,
+    extra7 String,
+    extra8 String,
+    extra9 String,
+    extra10 String
+}
+
+entity Comentarios {
+	autor String,
+    comentario String,
+    extra1 String,
+    extra2 String,
+    extra3 String,
+    extra4 String,
+    extra5 String,
+    extra6 String,
+    extra7 String,
+    extra8 String,
+    extra9 String,
+    extra10 String
+}
+
+entity Informacion {
+	comentarios Integer,
+    vistas Integer,
+    rating Integer,
+    extra1 String,
+    extra2 String,
+    extra3 String,
+    extra4 String,
+    extra5 String,
+    extra6 String,
+    extra7 String,
+    extra8 String,
+    extra9 String,
+    extra10 String
+}
+
+entity IndiceOriginal {
+	img String,
+    titulo String,
+    url String,
+    autor String,
+    fecha Instant,
+    ciudad String,
+    estado String,
+    pais String,
+    comentarios Integer,
+    vistas Integer,
+    rating Integer
+}
+
+entity Indice {
+	img String,
+    titulo String,
+    url String,
+    autor String,
+    fecha Instant,
+    ciudad String,
+    estado String,
+    pais String,
+    comentarios Integer,
+    vistas Integer,
+    rating Integer,
+    extra1 String,
+    extra2 String,
+    extra3 String,
+    extra4 String,
+    extra5 String,
+    extra6 String,
+    extra7 String,
+    extra8 String,
+    extra9 String,
+    extra10 String
+}
+
+relationship ManyToMany {
+	Reportes{Categorys(categoria)} to Categorys{Reportes(titulo)}
+}
+
+relationship ManyToMany {
+	 Reportes{Comentarios(autor)} to Comentarios{Reportes(titulo)}
+}
+
+relationship OneToOne {
+	Reportes{Informacion} to Informacion 
+}
+
+paginate all with pagination
+
+//dto all with mapstruct
+
+service all with serviceClass
+
+filter all
+
+search Reportes with elasticsearch
