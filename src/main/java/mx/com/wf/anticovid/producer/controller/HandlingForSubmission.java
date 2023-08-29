@@ -1,28 +1,25 @@
 package mx.com.wf.anticovid.producer.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-//import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import mx.com.wf.anticovid.producer.entity.RegistroEntity;
 import mx.com.wf.anticovid.producer.form.Registrar;
 import mx.com.wf.anticovid.producer.producer.RegistroEntityProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.redis.connection.RedisConnection;
-//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.data.redis.connection.RedisConnectionFactory;
-//import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
 
 import static java.lang.Long.parseLong;
+
 @Slf4j
 @Controller
-public class handlingforsubmission {
+public class HandlingForSubmission {
 
     @Autowired
     private RegistroEntityProducer producer;
@@ -47,24 +44,23 @@ public class handlingforsubmission {
         boolean matcherEmail = patternEmail.matcher(registrar.getEmail()).matches();
 //        log.info("matcherCurp "+matcherCurp);
 //        log.info("matcherEmail "+matcherEmail);
-        if(matcherCurp && matcherEmail) {
+        if (matcherCurp && matcherEmail) {
             long curpl = parseLong(registrar.getCurp());
             String curps = String.valueOf(curpl);
-            log.info("registrar "+curps);
-            log.info("registrar2 "+registrar.getEmail());
+            log.info("registrar curp: " + curps + " email: " + registrar.getEmail());
             boolean isRegistred = stringRedisTemplate.opsForSet().isMember(curps, registrar.getEmail());
-            log.info("isRegistred "+isRegistred);
-            if(!isRegistred) {
+            log.info("isRegistred " + isRegistred);
+            if (!isRegistred) {
                 RegistroEntity registroEntity = new RegistroEntity(curps, registrar.getEmail());
                 producer.sendMessage(registroEntity);
                 long addResult = stringRedisTemplate.opsForSet().add(curps, registrar.getEmail());
-                log.info("Redis Add "+addResult);
+                log.info("Redis Add " + addResult);
                 return "registro";
             }
         }
         //no responder a los post invalidos
-        log.info("Sin regreso ya existe");
-        return null;
+        log.info("Repetido");
+        return "repetido";
     }
 
 //    public @PreDestroy void flushTestDb() {
